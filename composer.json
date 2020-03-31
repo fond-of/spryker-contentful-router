@@ -11,7 +11,7 @@
   "require": {
     "php": ">=7.2",
     "fond-of-spryker/contentful": "dev-spryker_upgrade",
-    "spryker-shop/shop-router": "1.0.0"
+    "spryker-shop/shop-router": "^1.0.0"
   },
   "require-dev": {
     "spryker/code-sniffer": "^0.14.7",
