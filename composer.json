@@ -9,8 +9,8 @@
     }
   ],
   "require": {
-    "php": ">=7.2",
-    "fond-of-spryker/contentful": "dev-spryker_upgrade",
+    "php": ">=7.3",
+    "fond-of-spryker/contentful": "dev-2022-spryker-upgrade",
     "spryker-shop/shop-router": "^1.0.0"
   },
   "require-dev": {
