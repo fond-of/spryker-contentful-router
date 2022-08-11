@@ -16,22 +16,20 @@ class ContentfulRequestMatcher implements RequestMatcherInterface
     protected $contentfulClient;
 
     /**
-     * @var \Spryker\Service\Container\Container
+     * @var string
      */
-    protected $application;
+    protected $locale;
 
     /**
-     * ContentfulRequestMatcher constructor.
-     *
-     * @param  \FondOfSpryker\Yves\ContentfulRouter\Dependency\Client\ContentfulRouterToContentfulClientInterface  $contentfulClient
-     * @param  \Spryker\Service\Container\Container  $application
+     * @param \FondOfSpryker\Yves\ContentfulRouter\Dependency\Client\ContentfulRouterToContentfulClientInterface $contentfulClient
+     * @param string $locale
      */
     public function __construct(
         ContentfulRouterToContentfulClientInterface $contentfulClient,
-        Container $application
+        string $locale
     ) {
         $this->contentfulClient = $contentfulClient;
-        $this->application = $application;
+        $this->locale = $locale;
     }
 
     /**
@@ -50,7 +48,7 @@ class ContentfulRequestMatcher implements RequestMatcherInterface
             $pathInfo = substr($pathInfo, 0, -1);
         }
 
-        $data = $this->contentfulClient->matchUrl($pathInfo, $this->application['locale']);
+        $data = $this->contentfulClient->matchUrl($pathInfo, $this->locale);
         if (!empty($data)) {
             return $data;
         }

@@ -10,14 +10,17 @@ use FondOfSpryker\Yves\ContentfulRouter\Plugin\ResourceCreator\BlogTagResourceCr
 use FondOfSpryker\Yves\ContentfulRouter\Plugin\ResourceCreator\PageResourceCreatorPlugin;
 use Spryker\Yves\Kernel\AbstractBundleDependencyProvider;
 use Spryker\Yves\Kernel\Container;
-use Spryker\Yves\Kernel\Plugin\Pimple;
 
 class ContentfulRouterDependencyProvider extends AbstractBundleDependencyProvider
 {
 
     public const CLIENT_CONTENTFUL = 'CLIENT_CONTENTFUL';
     public const PLUGIN_RESOURCE_CREATORS_CONTENTFUL = 'PLUGIN_RESOURCE_CREATORS_CONTENTFUL';
-    public const PLUGIN_APPLICATION = 'PLUGIN_APPLICATION';
+
+    /**
+     * @var string
+     */
+    public const SERVICE_LOCALE = 'locale';
 
     /**
      * @param  \Spryker\Yves\Kernel\Container  $container
@@ -28,7 +31,7 @@ class ContentfulRouterDependencyProvider extends AbstractBundleDependencyProvide
     {
         $container = $this->addContentfulClient($container);
         $container = $this->addResourceCreatorPlugins($container);
-        $container = $this->provideApplication($container);
+        $container = $this->addLocale($container);
 
         return $container;
     }
@@ -62,17 +65,15 @@ class ContentfulRouterDependencyProvider extends AbstractBundleDependencyProvide
     }
 
     /**
-     * @param  \Spryker\Yves\Kernel\Container  $container
+     * @param \Spryker\Yves\Kernel\Container $container
      *
      * @return \Spryker\Yves\Kernel\Container
      */
-    protected function provideApplication(Container $container): Container
+    protected function addLocale(Container $container): Container
     {
-        $container[self::PLUGIN_APPLICATION] = function () {
-            $pimplePlugin = new Pimple();
-
-            return $pimplePlugin->getApplication();
-        };
+        $container->set(static::SERVICE_LOCALE, function (Container $container) {
+            return $container->getApplicationService(static::SERVICE_LOCALE);
+        });
 
         return $container;
     }
