@@ -48,7 +48,7 @@ class ContentfulRouterFactory extends AbstractFactory
     {
         return new ContentfulRequestMatcher(
             $this->getContentfulClient(),
-            $this->getApplication()
+            $this->getLocale()
         );
     }
 
@@ -81,12 +81,10 @@ class ContentfulRouterFactory extends AbstractFactory
     }
 
     /**
-     * @return \Spryker\Service\Container\Container
-     *
-     * @throws \Spryker\Yves\Kernel\Exception\Container\ContainerKeyNotFoundException
+     * @return string
      */
-    public function getApplication(): Container
+    protected function getLocale(): string
     {
-        return $this->getProvidedDependency(ContentfulRouterDependencyProvider::PLUGIN_APPLICATION);
+        return $this->getProvidedDependency(ContentfulRouterDependencyProvider::SERVICE_LOCALE);
     }
 }
