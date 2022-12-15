@@ -1,5 +1,5 @@
 # fond-of-spryker/contentful-router
-[![PHP from Travis config](https://img.shields.io/travis/php-v/symfony/symfony.svg)](https://php.net/)
+![build](https://github.com/fond-of/spryker-contentful-router/actions/workflows/main.yml/badge.svg)
 [![license](https://img.shields.io/github/license/mashape/apistatus.svg)](https://packagist.org/packages/fond-of-spryker/contentful-router)
 
 ## Description

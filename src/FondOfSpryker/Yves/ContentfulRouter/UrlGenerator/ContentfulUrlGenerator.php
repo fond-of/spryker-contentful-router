@@ -23,14 +23,21 @@ class ContentfulUrlGenerator implements UrlGeneratorInterface
         throw new RouteNotFoundException('YET NOT IMPLEMENTED');
     }
 
+    /**
+     * @param \Symfony\Component\Routing\RequestContext $context
+     *
+     * @return void
+     */
     public function setContext(RequestContext $context)
     {
         $this->requestContext = $context;
     }
 
+    /**
+     * @return \Symfony\Component\Routing\RequestContext
+     */
     public function getContext(): RequestContext
     {
         return $this->requestContext;
     }
-
 }

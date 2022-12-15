@@ -13,7 +13,6 @@ class ContentfulRouterPlugin extends AbstractPlugin implements RouterPluginInter
 {
     /**
      * @return \Symfony\Component\Routing\RouterInterface
-     * @throws \Spryker\Yves\Kernel\Exception\Container\ContainerKeyNotFoundException
      */
     public function getRouter(): RouterInterface
     {

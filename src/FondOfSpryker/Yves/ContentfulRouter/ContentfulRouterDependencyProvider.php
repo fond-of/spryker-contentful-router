@@ -13,8 +13,14 @@ use Spryker\Yves\Kernel\Container;
 
 class ContentfulRouterDependencyProvider extends AbstractBundleDependencyProvider
 {
-
+ /**
+  * @var string
+  */
     public const CLIENT_CONTENTFUL = 'CLIENT_CONTENTFUL';
+
+    /**
+     * @var string
+     */
     public const PLUGIN_RESOURCE_CREATORS_CONTENTFUL = 'PLUGIN_RESOURCE_CREATORS_CONTENTFUL';
 
     /**
@@ -23,7 +29,7 @@ class ContentfulRouterDependencyProvider extends AbstractBundleDependencyProvide
     public const SERVICE_LOCALE = 'locale';
 
     /**
-     * @param  \Spryker\Yves\Kernel\Container  $container
+     * @param \Spryker\Yves\Kernel\Container $container
      *
      * @return \Spryker\Yves\Kernel\Container
      */
@@ -37,7 +43,7 @@ class ContentfulRouterDependencyProvider extends AbstractBundleDependencyProvide
     }
 
     /**
-     * @param  \Spryker\Yves\Kernel\Container  $container
+     * @param \Spryker\Yves\Kernel\Container $container
      *
      * @return \Spryker\Yves\Kernel\Container
      */
@@ -51,7 +57,7 @@ class ContentfulRouterDependencyProvider extends AbstractBundleDependencyProvide
     }
 
     /**
-     * @param  \Spryker\Yves\Kernel\Container  $container
+     * @param \Spryker\Yves\Kernel\Container $container
      *
      * @return \Spryker\Yves\Kernel\Container
      */
@@ -79,7 +85,7 @@ class ContentfulRouterDependencyProvider extends AbstractBundleDependencyProvide
     }
 
     /**
-     * @return \FondOfSpryker\Yves\ContentfulRouter\Plugin\ResourceCreator\ResourceCreatorPluginInterface[]
+     * @return array<\FondOfSpryker\Yves\ContentfulRouter\Plugin\ResourceCreator\ResourceCreatorPluginInterface>
      */
     protected function getResourceCreatorPlugins()
     {

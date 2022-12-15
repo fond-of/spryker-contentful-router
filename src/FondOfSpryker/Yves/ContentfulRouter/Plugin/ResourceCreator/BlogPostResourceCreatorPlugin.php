@@ -4,10 +4,19 @@ namespace FondOfSpryker\Yves\ContentfulRouter\Plugin\ResourceCreator;
 
 class BlogPostResourceCreatorPlugin implements ResourceCreatorPluginInterface
 {
+    /**
+     * @var string
+     */
     private const RESOURCE_TYPE = 'blog';
 
+    /**
+     * @var string
+     */
     private const ACTION_NAME = 'post';
 
+    /**
+     * @var string
+     */
     protected const MODULE_NAME = 'Contentful';
 
     /**
@@ -16,9 +25,7 @@ class BlogPostResourceCreatorPlugin implements ResourceCreatorPluginInterface
     protected $isDefault;
 
     /**
-     * BlogPostResourceCreator constructor.
-     *
-     * @param  bool  $isDefault
+     * @param bool $isDefault
      */
     public function __construct(bool $isDefault = false)
     {
@@ -54,7 +61,7 @@ class BlogPostResourceCreatorPlugin implements ResourceCreatorPluginInterface
      */
     public function getType(): string
     {
-        return static::RESOURCE_TYPE.ucfirst($this->getActionName());
+        return static::RESOURCE_TYPE . ucfirst($this->getActionName());
     }
 
     /**
