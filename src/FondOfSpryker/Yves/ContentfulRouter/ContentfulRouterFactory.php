@@ -3,11 +3,10 @@
 namespace FondOfSpryker\Yves\ContentfulRouter;
 
 use FondOfSpryker\Yves\ContentfulRouter\Dependency\Client\ContentfulRouterToContentfulClientInterface;
+use FondOfSpryker\Yves\ContentfulRouter\RequestMatcher\ContentfulRequestMatcher;
 use FondOfSpryker\Yves\ContentfulRouter\RouteEnhancer\ControllerRouteEnhancer;
 use FondOfSpryker\Yves\ContentfulRouter\Router\ContentfulRouter;
-use FondOfSpryker\Yves\ContentfulRouter\RequestMatcher\ContentfulRequestMatcher;
 use FondOfSpryker\Yves\ContentfulRouter\UrlGenerator\ContentfulUrlGenerator;
-use Spryker\Service\Container\Container;
 use Spryker\Yves\Kernel\AbstractFactory;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Component\Routing\Matcher\RequestMatcherInterface;
@@ -15,23 +14,20 @@ use Symfony\Component\Routing\RouterInterface;
 
 class ContentfulRouterFactory extends AbstractFactory
 {
-
-    /**
-     * @return \Symfony\Component\Routing\RouterInterface
-     * @throws \Spryker\Yves\Kernel\Exception\Container\ContainerKeyNotFoundException
-     */
+ /**
+  * @return \Symfony\Component\Routing\RouterInterface
+  */
     public function createRouter(): RouterInterface
     {
         return new ContentfulRouter(
             $this->createRequestMatcher(),
             $this->createUrlGenerator(),
-            $this->createRouteEnhancer()
+            $this->createRouteEnhancer(),
         );
     }
 
     /**
-     * @return \Symfony\Cmf\Component\Routing\Enhancer\RouteEnhancerInterface[]
-     * @throws \Spryker\Yves\Kernel\Exception\Container\ContainerKeyNotFoundException
+     * @return array<\Symfony\Cmf\Component\Routing\Enhancer\RouteEnhancerInterface>
      */
     public function createRouteEnhancer(): array
     {
@@ -42,13 +38,12 @@ class ContentfulRouterFactory extends AbstractFactory
 
     /**
      * @return \Symfony\Component\Routing\Matcher\RequestMatcherInterface
-     * @throws \Spryker\Yves\Kernel\Exception\Container\ContainerKeyNotFoundException
      */
     public function createRequestMatcher(): RequestMatcherInterface
     {
         return new ContentfulRequestMatcher(
             $this->getContentfulClient(),
-            $this->getLocale()
+            $this->getLocale(),
         );
     }
 
@@ -62,8 +57,6 @@ class ContentfulRouterFactory extends AbstractFactory
 
     /**
      * @return \FondOfSpryker\Yves\ContentfulRouter\Dependency\Client\ContentfulRouterToContentfulClientInterface
-     *
-     * @throws \Spryker\Yves\Kernel\Exception\Container\ContainerKeyNotFoundException
      */
     public function getContentfulClient(): ContentfulRouterToContentfulClientInterface
     {
@@ -71,9 +64,7 @@ class ContentfulRouterFactory extends AbstractFactory
     }
 
     /**
-     * @return \FondOfSpryker\Yves\ContentfulRouter\Plugin\ResourceCreator\ResourceCreatorPluginInterface[]
-     *
-     * @throws \Spryker\Yves\Kernel\Exception\Container\ContainerKeyNotFoundException
+     * @return array<\FondOfSpryker\Yves\ContentfulRouter\Plugin\ResourceCreator\ResourceCreatorPluginInterface>
      */
     public function getResourceCreatorPlugins(): array
     {

@@ -13,12 +13,12 @@ use Symfony\Component\HttpFoundation\Request;
 class ControllerRouteEnhancer implements RouteEnhancerInterface
 {
     /**
-     * @var \FondOfSpryker\Yves\ContentfulRouter\Plugin\ResourceCreator\ResourceCreatorPluginInterface[]
+     * @var array<\FondOfSpryker\Yves\ContentfulRouter\Plugin\ResourceCreator\ResourceCreatorPluginInterface>
      */
     protected $resourceCreatorPlugins;
 
     /**
-     * @param  \FondOfSpryker\Yves\ContentfulRouter\Plugin\ResourceCreator\ResourceCreatorPluginInterface[]  $resourceCreatorPlugins
+     * @param array<\FondOfSpryker\Yves\ContentfulRouter\Plugin\ResourceCreator\ResourceCreatorPluginInterface> $resourceCreatorPlugins
      */
     public function __construct(array $resourceCreatorPlugins)
     {
@@ -26,12 +26,10 @@ class ControllerRouteEnhancer implements RouteEnhancerInterface
     }
 
     /**
-     * @param  array  $defaults
-     * @param  \Symfony\Component\HttpFoundation\Request  $request
+     * @param array $defaults
+     * @param \Symfony\Component\HttpFoundation\Request $request
      *
      * @return array
-     * @throws \FondOfSpryker\Yves\ContentfulRouter\Exception\DefaultResourceCreatorNotSetException
-     * @throws \Spryker\Shared\Kernel\ClassResolver\Controller\ControllerNotFoundException
      */
     public function enhance(array $defaults, Request $request)
     {
@@ -45,17 +43,18 @@ class ControllerRouteEnhancer implements RouteEnhancerInterface
     }
 
     /**
-     * @param  \FondOfSpryker\Yves\ContentfulRouter\Plugin\ResourceCreator\ResourceCreatorPluginInterface  $resourceCreator
-     * @param  array  $data
+     * @param \FondOfSpryker\Yves\ContentfulRouter\Plugin\ResourceCreator\ResourceCreatorPluginInterface $resourceCreator
+     * @param array $data
      *
      * @return array
-     *
-     * @throws \Spryker\Shared\Kernel\ClassResolver\Controller\ControllerNotFoundException
      */
     protected function createResource(ResourceCreatorPluginInterface $resourceCreator, array $data)
     {
-        $bundleControllerAction = new BundleControllerAction($resourceCreator->getModuleName(),
-            $resourceCreator->getControllerName(), $resourceCreator->getActionName());
+        $bundleControllerAction = new BundleControllerAction(
+            $resourceCreator->getModuleName(),
+            $resourceCreator->getControllerName(),
+            $resourceCreator->getActionName(),
+        );
         $routeResolver = new BundleControllerActionRouteNameResolver($bundleControllerAction);
 
         $controllerResolver = new ControllerResolver();
@@ -65,21 +64,22 @@ class ControllerRouteEnhancer implements RouteEnhancerInterface
             $actionName .= 'Action';
         }
 
-        $resourceCreatorResult['entryId'] = $data['value'];
-        $resourceCreatorResult['_controller'] = [$controller, $actionName];
-        $resourceCreatorResult['_route'] = $routeResolver->resolve();
-
-        return $resourceCreatorResult;
+        return [
+            'entryId' => $data['value'],
+            '_controller' => [$controller, $actionName],
+            '_route' => $routeResolver->resolve(),
+        ];
     }
 
     /**
-     * @return \FondOfSpryker\Yves\ContentfulRouter\Plugin\ResourceCreator\ResourceCreatorPluginInterface
      * @throws \FondOfSpryker\Yves\ContentfulRouter\Exception\DefaultResourceCreatorNotSetException
+     *
+     * @return \FondOfSpryker\Yves\ContentfulRouter\Plugin\ResourceCreator\ResourceCreatorPluginInterface
      */
     protected function getDefaultResourceCreator(): ResourceCreatorPluginInterface
     {
-        foreach ($this->resourceCreatorPlugins as $resourceCreatorPlugin){
-            if ($resourceCreatorPlugin->isDefault()){
+        foreach ($this->resourceCreatorPlugins as $resourceCreatorPlugin) {
+            if ($resourceCreatorPlugin->isDefault()) {
                 return $resourceCreatorPlugin;
             }
         }

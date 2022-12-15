@@ -12,9 +12,7 @@ class ContentfulRouterToContentfulClientBridge implements ContentfulRouterToCont
     protected $contentfulClient;
 
     /**
-     * ContentfulRouterToContentfulClientBridge constructor.
-     *
-     * @param  \FondOfSpryker\Client\Contentful\ContentfulClientInterface  $contentfulClient
+     * @param \FondOfSpryker\Client\Contentful\ContentfulClientInterface $contentfulClient
      */
     public function __construct(ContentfulClientInterface $contentfulClient)
     {
@@ -25,7 +23,7 @@ class ContentfulRouterToContentfulClientBridge implements ContentfulRouterToCont
      * @param string $url
      * @param string $localeName
      *
-     * @return string[]|null
+     * @return array<string>|null
      */
     public function matchUrl(string $url, string $localeName): ?array
     {

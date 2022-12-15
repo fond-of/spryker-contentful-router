@@ -3,7 +3,6 @@
 namespace FondOfSpryker\Yves\ContentfulRouter\RequestMatcher;
 
 use FondOfSpryker\Yves\ContentfulRouter\Dependency\Client\ContentfulRouterToContentfulClientInterface;
-use Spryker\Service\Container\Container;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Exception\ResourceNotFoundException;
 use Symfony\Component\Routing\Matcher\RequestMatcherInterface;
@@ -33,11 +32,11 @@ class ContentfulRequestMatcher implements RequestMatcherInterface
     }
 
     /**
-     * @param  \Symfony\Component\HttpFoundation\Request  $request
+     * @param \Symfony\Component\HttpFoundation\Request $request
      *
-     * @return array
      * @throws \Symfony\Component\Routing\Exception\ResourceNotFoundException
      *
+     * @return array
      */
     public function matchRequest(Request $request): array
     {
@@ -49,7 +48,7 @@ class ContentfulRequestMatcher implements RequestMatcherInterface
         }
 
         $data = $this->contentfulClient->matchUrl($pathInfo, $this->locale);
-        if (!empty($data)) {
+        if ($data) {
             return $data;
         }
 

@@ -4,10 +4,19 @@ namespace FondOfSpryker\Yves\ContentfulRouter\Plugin\ResourceCreator;
 
 class PageResourceCreatorPlugin implements ResourceCreatorPluginInterface
 {
+    /**
+     * @var string
+     */
     private const RESOURCE_TYPE = 'page';
 
+    /**
+     * @var string
+     */
     private const ACTION_NAME = 'index';
 
+    /**
+     * @var string
+     */
     protected const MODULE_NAME = 'Contentful';
 
     /**
@@ -16,9 +25,7 @@ class PageResourceCreatorPlugin implements ResourceCreatorPluginInterface
     protected $isDefault;
 
     /**
-     * PageResourceCreator constructor.
-     *
-     * @param  bool  $isDefault
+     * @param bool $isDefault
      */
     public function __construct(bool $isDefault = false)
     {
